@@ -18,7 +18,7 @@ public class Transformator {
 
         // Aqui, concatenamos "DTO" ao nome da classe de entrada para formar o nome da classe DTO (Define a classe DTO correspondente).
         // Lança ClassNotFoundException se a classe DTO correspondente não for encontrada.
-        Class<?> target = Class.forName(source + "DTO"); // Neste exemplo, receberá a classe PessoaDTO
+        Class<?> target = Class.forName(source.getName() + "DTO"); // Neste exemplo, receberá a classe PessoaDTO
 
         // Instancia a classe de destino usando o construtor padrão.
         O targetClass = (O) target.getDeclaredConstructor().newInstance(); // Neste caso será então PessoaDTO(String nome, String cpf)
@@ -36,7 +36,7 @@ public class Transformator {
                                 // Define o valor do campo de origem no campo de destino
                                 targetField.set(targetClass, sourceField.get(input));
                             } catch (IllegalAccessException e) {
-                                throw new RuntimeException(e);
+                                e.printStackTrace();
                             }
                         }
                 )
